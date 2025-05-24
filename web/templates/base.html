@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurador de Uniformes</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="configurador-uniforme">
+        <!-- Etapa 1: Linhas (carregada dinamicamente com HTMX) -->
+        <div id="etapa-linhas" 
+             hx-get="/linhas" 
+             hx-trigger="load" 
+             hx-target="this" 
+             hx-swap="innerHTML">
+        </div>
+
+        <!-- Etapas seguintes -->
+        <div id="etapa-pecas"></div>
+        <div id="etapa-modelos"></div>
+        <div id="etapa-tipos"></div>
+        <div id="etapa-tecidos"></div>
+
+        <!-- Preview do uniforme sendo construído -->
+        <div class="preview-uniforme">
+            <div class="uniforme-visual"></div>
+            <div class="resumo-selecoes"></div>
+            <div class="preco-atual">R$ 0,00</div>
+        </div>
+    </div>
+</body>
+</html>
+

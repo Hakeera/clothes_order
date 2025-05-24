@@ -1,0 +1,17 @@
+{
+  "Escritorio": {
+    "Camiseta": {
+      "Modelos": ["Manga Curta", "Polo Padrão"],
+      "Tipos": ["Padrão", "Slim"],
+      "Tecidos": ["PV", "Algodão"]
+    }
+  },
+  "Medica": {
+    "Jaleco": {
+      "Modelos": ["Manga Longa"],
+      "Tipos": ["Slim"],
+      "Tecidos": ["Piquet", "PV"]
+    }
+  }
+}
+

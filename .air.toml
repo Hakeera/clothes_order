@@ -1,0 +1,20 @@
+# .air.toml
+
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go run ./cmd/server"
+bin = "tmp/main"
+full_bin = "tmp/main"
+include_ext = ["go", "tpl", "tmpl", "html"]
+exclude_dir = ["tmp", "web/static", "uploads"]
+exclude_file = []
+delay = 1000 # milissegundos
+
+[log]
+time = true
+
+[debug]
+log = "air_errors.log"
+

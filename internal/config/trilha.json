@@ -1,16 +1,26 @@
 {
-  "Escritorio": {
-    "Camiseta": {
-      "Modelos": ["Manga Curta", "Polo Padrão"],
-      "Tipos": ["Padrão", "Slim"],
-      "Tecidos": ["PV", "Algodão"]
+  "Escritório": {
+    "Camisa": {
+      "modelos": ["Social", "Polo"],
+      "tipos": ["Slim", "Padrão"],
+      "tecidos": ["Algodão", "Poliéster"]
+    },
+    "Calça": {
+      "modelos": ["Reta", "Skinny"],
+      "tipos": ["Padrão", "Slim"],
+      "tecidos": ["Sarja", "Jeans"]
     }
   },
-  "Medica": {
+  "Médica": {
     "Jaleco": {
-      "Modelos": ["Manga Longa"],
-      "Tipos": ["Slim"],
-      "Tecidos": ["Piquet", "PV"]
+      "modelos": ["Curto", "Longo"],
+      "tipos": ["Padrão"],
+      "tecidos": ["Brim", "Oxford"]
+    },
+    "Calça": {
+      "modelos": ["Reta"],
+      "tipos": ["Padrão"],
+      "tecidos": ["Algodão"]
     }
   }
 }

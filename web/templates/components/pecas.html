@@ -1,0 +1,8 @@
+<h2>Selecione o Tipo de Peça</h2>
+<div class="opcoes-grid" id="etapa-pecas">
+    {{range .Pecas}}
+        <button hx-get="/modelos?peca={{.}}" hx-target="#etapa-modelos" hx-swap="innerHTML">
+            {{.}}
+        </button>
+    {{end}}
+</div>

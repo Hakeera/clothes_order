@@ -9,14 +9,10 @@ import (
 )
 
 func HomeHandler(c echo.Context) error {
-	// Pode passar dados adicionais no segundo argumento, se desejar
 	return c.Render(http.StatusOK, "base.html", nil)
 }
 
 func LinhasHandler(c echo.Context) error {
-    // Debug: verificar se está chegando aqui
-    fmt.Println("GetLinhas chamada")
-    
     linhas := make([]string, 0, len(config.Trilha))
     for linha := range config.Trilha {
         linhas = append(linhas, linha)
@@ -37,22 +33,21 @@ func LinhasHandler(c echo.Context) error {
 
 func PecasHandler(c echo.Context) error {
 	linhaSelecionada := c.QueryParam("linha")
-	fmt.Println("Linha:", linhaSelecionada)
 
-	pecasMap := config.Trilha[linhaSelecionada]
-	for peca := range pecasMap {
-		
-	// Verifica se a linha existe na trilha
-	pecas, ok := config.Trilha[linhaSelecionada]
+	// Verifica se a linha existe na trilha carregada
+	pecasMap, ok := config.Trilha[linhaSelecionada]
 	if !ok {
 		return c.String(http.StatusNotFound, "Linha não encontrada")
 	}
 
-	// Debug: verificar dados
-	fmt.Printf("Peças encontradas: %+v\n", pecas)
+	// Extrai os nomes das peças disponíveis na linha
+	pecas := make([]string, 0, len(pecasMap))
+	for nome := range pecasMap {
+		pecas = append(pecas, nome)
+	}
 
+	// Renderiza o template com as peças da linha
 	return c.Render(http.StatusOK, "components/pecas.html", echo.Map{
-	"Peças": pecas ,
+		"Pecas": pecas,
 	})
 }
-

@@ -5,7 +5,6 @@ type Uniform struct {
     Linha        string `json:"linha"`
     TipoPeca     string `json:"tipo_peca"`
     Modelo       string `json:"modelo"`
-    Tipo         string `json:"tipo"`
     Tecido       string `json:"tecido"`
     TipoDesenho  string `json:"tipo_desenho"`
     Posicao      string `json:"posicao"`

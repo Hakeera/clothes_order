@@ -2,24 +2,24 @@
   "Escritório": {
     "Camisa": {
       "modelos": ["Social", "Polo"],
-      "tipos": ["Slim", "Padrão"],
       "tecidos": ["Algodão", "Poliéster"]
     },
     "Calça": {
       "modelos": ["Reta", "Skinny"],
-      "tipos": ["Padrão", "Slim"],
       "tecidos": ["Sarja", "Jeans"]
+    },
+    "Camiseta": {
+      "modelos": ["Manga Curta", "Manga Curta Babylook", "Manga Longa"],
+      "tecidos": ["Algodão", "PV", "Modal"]
     }
   },
   "Médica": {
     "Jaleco": {
       "modelos": ["Curto", "Longo"],
-      "tipos": ["Padrão"],
       "tecidos": ["Brim", "Oxford"]
     },
     "Calça": {
       "modelos": ["Reta"],
-      "tipos": ["Padrão"],
       "tecidos": ["Algodão"]
     }
   }

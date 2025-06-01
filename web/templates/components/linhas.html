@@ -1,8 +1,13 @@
 <h2>Selecione uma de Nossas Linhas</h2>
 <div class="opcoes-grid">
     {{range .Linhas}}
-        <button hx-get="/pecas?linha={{.}}" hx-target="#etapa-pecas" hx-swap="innerHTML" >
+        <button 
+            hx-get="/pecas?linha={{.}}" 
+            hx-target="#etapa-pecas" 
+            hx-swap="innerHTML"
+            data-etapa="etapa-linhas">
             {{.}}
         </button>
     {{end}}
 </div>
+

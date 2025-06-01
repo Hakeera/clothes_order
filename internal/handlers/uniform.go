@@ -49,5 +49,31 @@ func PecasHandler(c echo.Context) error {
 	// Renderiza o template com as peças da linha
 	return c.Render(http.StatusOK, "components/pecas.html", echo.Map{
 		"Pecas": pecas,
+		"Linha": linhaSelecionada,
 	})
 }
+
+func ModelosHandler(c echo.Context) error {
+	linhaSelecionada := c.QueryParam("linha")
+	pecaSelecionada := c.QueryParam("peca")
+
+	// Verifica se a linha existe na trilha carregada
+	pecasMap, ok := config.Trilha[linhaSelecionada]
+	if !ok {
+		return c.String(http.StatusNotFound, "Linha não encontrada")
+	}
+
+	// Verifica se a peça existe dentro da linha
+	pecaConfig, ok := pecasMap[pecaSelecionada]
+	if !ok {
+		return c.String(http.StatusNotFound, "Peça não encontrada")
+	}
+
+	fmt.Println("MODELOS: ", pecaConfig.Modelos)
+	return c.Render(http.StatusOK, "components/modelos.html", echo.Map{
+		"Modelos": pecaConfig.Modelos,
+		"Linha":   linhaSelecionada,
+		"Peca":    pecaSelecionada,
+	})
+}
+

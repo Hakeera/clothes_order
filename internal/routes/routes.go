@@ -13,8 +13,7 @@ func RegisterRoutes(e *echo.Echo, renderer echo.Renderer) {
 	e.GET("/", handlers.HomeHandler)
 	e.GET("/linhas", handlers.LinhasHandler)
 	e.GET("/pecas", handlers.PecasHandler)
+	e.GET("/modelos", handlers.ModelosHandler)
+
 	// APIs de configuração do uniforme (HTMX endpoints)
-	//e.POST("/linhas", FiltrarLinhas)
-	//e.POST("/pecas", FiltrarPecas)
-	//e.POST("/modelos", FiltrarModelos)
 }

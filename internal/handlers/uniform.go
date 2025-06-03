@@ -4,6 +4,7 @@ import (
 	"clothes_order/internal/config"
 	"fmt"
 	"net/http"
+	"slices"
 
 	"github.com/labstack/echo/v4"
 )
@@ -69,11 +70,44 @@ func ModelosHandler(c echo.Context) error {
 		return c.String(http.StatusNotFound, "Peça não encontrada")
 	}
 
-	fmt.Println("MODELOS: ", pecaConfig.Modelos)
 	return c.Render(http.StatusOK, "components/modelos.html", echo.Map{
 		"Modelos": pecaConfig.Modelos,
 		"Linha":   linhaSelecionada,
 		"Peca":    pecaSelecionada,
+	})
+}
+func TecidosHandler(c echo.Context) error {
+	linhaSelecionada := c.QueryParam("linha")
+	pecaSelecionada := c.QueryParam("peca")
+	modeloSelecionado := c.QueryParam("modelo")
+
+	// Verifica se a linha existe na trilha carregada
+	pecasMap, ok := config.Trilha[linhaSelecionada]
+	if !ok {
+		return c.String(http.StatusNotFound, "Linha não encontrada")
+	}
+
+	// Verifica se a peça existe dentro da linha
+	pecaConfig, ok := pecasMap[pecaSelecionada]
+	if !ok {
+		return c.String(http.StatusNotFound, "Peça não encontrada")
+	}
+
+	// Verifica se o modelo existe no slice de modelos
+	modeloValido := false
+	// Looping para checar
+	modeloValido = slices.Contains(pecaConfig.Modelos, modeloSelecionado)
+
+	if !modeloValido {
+		return c.String(http.StatusNotFound, "Modelo não encontrado")
+	}
+
+	// Renderiza o template com os tecidos disponíveis
+	return c.Render(http.StatusOK, "components/tecidos.html", echo.Map{
+		"Tecidos": pecaConfig.Tecidos,
+		"Linha":   linhaSelecionada,
+		"Peca":    pecaSelecionada,
+		"Modelo":  modeloSelecionado,
 	})
 }
 

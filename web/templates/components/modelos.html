@@ -1,7 +1,9 @@
 <h2>Selecione o Modelo<h2>
 <div class="opcoes-grid" id="etapa-modelos">
     {{range .Modelos}}
-        <button hx-get="/tecidos?modelo={{.}}" hx-target="#etapa-tecidos" hx-swap="innerHTML">
+        <button hx-get="/tecidos?linha={{$.Linha}}&peca={{$.Peca}}&modelo={{.}}"
+		hx-target="#etapa-tecidos"
+		hx-swap="innerHTML">
             {{.}}
         </button>
     {{end}}

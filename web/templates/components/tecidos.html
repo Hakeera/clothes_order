@@ -1,0 +1,13 @@
+<h2>Selecione o Tecido</h2>
+<div class="opcoes-grid" id="etapa-pecas">
+	{{range .Tecidos}}
+	<button 
+	hx-get="/resumo?linha={{$.Linha}}&peca={{$.Peca}}&modelo={{$.Modelo}}&tecido={{.}}"
+	hx-target="#etapa-resumo" 
+	hx-swap="innerHTML"
+	hx-on:click="limparEtapas(['#etapa-resumo'])"
+	>
+    {{.}}
+  </button>
+{{end}}
+</div>

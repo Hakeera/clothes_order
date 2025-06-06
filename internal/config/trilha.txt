@@ -1,9 +1,14 @@
+
 {
   "Escritório": {
     "Camisa": {
       "modelos": ["Social", "Polo"],
       "tecidos": ["Algodão", "Poliéster"],
-      "grade": ["Infantil", "1.5"]
+      "grade": {
+	"infantil" : [0.75]
+	"juvenil" : [0.85]
+	"adulto" : [0.95]
+      }
     },
     "Calça": {
       "modelos": ["Reta", "Skinny"],

@@ -34,23 +34,36 @@ func LinhasHandler(c echo.Context) error {
 
 func PecasHandler(c echo.Context) error {
 	linhaSelecionada := c.QueryParam("linha")
-
-	// Verifica se a linha existe na trilha carregada
-	pecasMap, ok := config.Trilha[linhaSelecionada]
-	if !ok {
+	
+	// Verifica se a linha existe
+	if !config.VerificarLinhaExiste(linhaSelecionada) {
 		return c.String(http.StatusNotFound, "Linha não encontrada")
 	}
-
-	// Extrai os nomes das peças disponíveis na linha
-	pecas := make([]string, 0, len(pecasMap))
-	for nome := range pecasMap {
-		pecas = append(pecas, nome)
+	
+	// Obtém nomes das peças
+	pecas, err := config.ObterNomesPecas(linhaSelecionada)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "Erro ao obter peças: "+err.Error())
 	}
-
-	// Renderiza o template com as peças da linha
+	
+	// Obtém todas as imagens
+	imagens, err := config.ObterTodasImagensDaLinha(linhaSelecionada)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "Erro ao obter imagens: "+err.Error())
+	}
+	
+	// Obtém o map completo das peças para acessar imagens individuais
+	pecasCompletas := config.Trilha[linhaSelecionada]
+	
+	fmt.Printf("Peças encontradas: %+v\n", pecas)
+	fmt.Printf("Imagens encontradas: %+v\n", imagens)
+	
+	// Renderiza o template
 	return c.Render(http.StatusOK, "components/pecas.html", echo.Map{
-		"Pecas": pecas,
-		"Linha": linhaSelecionada,
+		"Pecas":          pecas,
+		"Imagens":        imagens,
+		"PecasCompletas": pecasCompletas,
+		"Linha":          linhaSelecionada,
 	})
 }
 

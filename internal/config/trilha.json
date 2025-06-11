@@ -1,23 +1,27 @@
 {
   "Escritório": {
     "Camisa": {
+      "img": ["/static/images/camisa.jpg"],
       "modelos": ["Social", "Polo"],
       "tecidos": ["Algodão", "Poliéster"],
       "grade": ["Infantil", "1.5"]
     },
-    "Calça": {
-      "modelos": ["Reta", "Skinny"],
-      "tecidos": ["Sarja", "Jeans"]
+    "Blusa": {
+      "img": ["/static/images/blusa.jpg"],
+      "modelos": ["Limpa", "Canguru"],
+      "tecidos": ["Sarja", "Blusa"]
     },
     "Camiseta": {
+      "img": ["/static/images/camiseta.jpg"],
       "modelos": ["Manga Curta", "Manga Curta Babylook", "Manga Longa"],
       "tecidos": ["Algodão", "PV", "Modal"]
     }
   },
-  "Médica": {
-    "Jaleco": {
+  "Escolar": {
+    "Bermuda": {
+      "img": ["/static/images/bermuda.jpg"],
       "modelos": ["Curto", "Longo"],
-      "tecidos": ["Brim", "Oxford"]
+      "tecidos": ["Moletom", "Moletinho"]
     },
     "Calça": {
       "modelos": ["Reta"],

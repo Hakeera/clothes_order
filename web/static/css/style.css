@@ -1,3 +1,150 @@
+/* Reset para evitar conflitos */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#configurador-uniforme {
+    width: 100%;
+}
+
+/* Layout principal do configurador usando CSS Grid */
+.configurador-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 para esquerda, 1/3 para direita */
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    align-items: start; /* Importante para alinhar no topo */
+}
+
+/* Coluna da esquerda - Botões de seleção */
+.configurador-left {
+    /* Grid cuida do posicionamento */
+}
+
+/* Coluna da direita - Preview */
+.configurador-right {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+/* Estilos do preview */
+.preview-uniforme {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.preview-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.preview-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.uniforme-visual {
+    padding: 20px;
+    min-height: 250px;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.uniforme-visual:empty::before {
+    content: "Selecione uma peça para visualizar";
+    color: #666;
+    font-style: italic;
+}
+
+.resumo-selecoes {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background: white;
+}
+
+.preco-atual {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #007bff;
+}
+
+/* Estilos para as etapas de seleção */
+.configurador-left > div {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.configurador-left h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* Grid para os botões de opções */
+.opcoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .configurador-container {
+        grid-template-columns: 1fr; /* Uma coluna só */
+        gap: 20px;
+    }
+    
+    .configurador-right {
+        position: static;
+        order: -1; /* Preview vai para cima */
+    }
+    
+    .opcoes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .configurador-container {
+        padding: 15px;
+    }
+    
+    .configurador-left > div {
+        padding: 20px;
+    }
+    
+    .opcoes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
 }

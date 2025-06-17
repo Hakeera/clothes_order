@@ -1,12 +1,58 @@
-<h2>Selecione o Modelo<h2>
+<!-- Atualiza a visualização do uniforme -->
+{{if .ImagemPeca}}
+<div hx-swap-oob="innerHTML:.uniforme-visual">
+    <div style="text-align: center; padding: 20px;">
+        <h3 style="margin-bottom: 15px; color: #333;">{{.Peca}}</h3>
+        <img src="{{.ImagemPeca}}" 
+             alt="{{.Peca}}" 
+             style="max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; padding: 20px; background-color: #f8f9fa; border-radius: 8px; color: #6c757d;">
+            Imagem não disponível
+        </div>
+    </div>
+</div>
+{{else}}
+<div hx-swap-oob="innerHTML:.uniforme-visual">
+    <div style="text-align: center; padding: 20px;">
+        <h3 style="margin-bottom: 15px; color: #333;">{{.Peca}}</h3>
+        <div style="padding: 40px; background-color: #f8f9fa; border-radius: 8px; color: #6c757d;">
+            Imagem não disponível
+        </div>
+    </div>
+</div>
+{{end}}
+
+<h2>Selecione o Modelo</h2>
+
 <div class="opcoes-grid" id="etapa-modelos">
-    {{range .Modelos}}
-        <button hx-get="/tecidos?linha={{$.Linha}}&peca={{$.Peca}}&modelo={{.}}"
-		hx-target="#etapa-tecidos"
-		hx-swap="innerHTML">
-            {{.}}
-        </button>
+    {{range $index, $modelo := .Modelos}}
+        <div style="border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; transition: all 0.3s ease; padding: 20px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;"
+             hx-get="/tecidos?linha={{$.Linha}}&peca={{$.Peca}}&modelo={{$modelo}}"
+             hx-target="#etapa-tecidos" 
+             hx-swap="innerHTML"
+             onmouseover="this.style.borderColor='#007bff'; this.style.transform='translateY(-2px)'"
+             onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)'"
+             onclick="selectModelo(this)">
+            
+            <span style="font-weight: 600; font-size: 16px; color: #333;">
+                {{$modelo}}
+            </span>
+        </div>
     {{end}}
 </div>
 
-
+<script>
+    // Função para marcar o modelo selecionado
+    function selectModelo(element) {
+        // Remove seleção anterior
+        document.querySelectorAll('#etapa-modelos > div').forEach(card => {
+            card.style.borderColor = '#ddd';
+            card.style.backgroundColor = 'white';
+        });
+        
+        // Adiciona seleção ao modelo clicado
+        element.style.borderColor = '#007bff';
+        element.style.backgroundColor = '#f0f8ff';
+    }
+</script>

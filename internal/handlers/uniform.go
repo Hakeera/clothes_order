@@ -46,23 +46,11 @@ func PecasHandler(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "Erro ao obter peças: "+err.Error())
 	}
 	
-	// Obtém todas as imagens
-	imagens, err := config.ObterTodasImagensDaLinha(linhaSelecionada)
-	if err != nil {
-		return c.String(http.StatusInternalServerError, "Erro ao obter imagens: "+err.Error())
-	}
-	
-	// Obtém o map completo das peças para acessar imagens individuais
-	pecasCompletas := config.Trilha[linhaSelecionada]
-	
 	fmt.Printf("Peças encontradas: %+v\n", pecas)
-	fmt.Printf("Imagens encontradas: %+v\n", imagens)
 	
 	// Renderiza o template
 	return c.Render(http.StatusOK, "components/pecas.html", echo.Map{
 		"Pecas":          pecas,
-		"Imagens":        imagens,
-		"PecasCompletas": pecasCompletas,
 		"Linha":          linhaSelecionada,
 	})
 }
@@ -70,25 +58,35 @@ func PecasHandler(c echo.Context) error {
 func ModelosHandler(c echo.Context) error {
 	linhaSelecionada := c.QueryParam("linha")
 	pecaSelecionada := c.QueryParam("peca")
-
+	
 	// Verifica se a linha existe na trilha carregada
 	pecasMap, ok := config.Trilha[linhaSelecionada]
 	if !ok {
 		return c.String(http.StatusNotFound, "Linha não encontrada")
 	}
-
+	
 	// Verifica se a peça existe dentro da linha
 	pecaConfig, ok := pecasMap[pecaSelecionada]
 	if !ok {
 		return c.String(http.StatusNotFound, "Peça não encontrada")
 	}
-
+	
+	// Obtém a primeira imagem da peça para exibir na visualização
+	var imagemPeca string
+	if len(pecaConfig.Img) > 0 {
+		imagemPeca = pecaConfig.Img[0]
+	}
+	
+	fmt.Printf("Peça selecionada: %s, Imagem: %s\n", pecaSelecionada, imagemPeca)
+	
 	return c.Render(http.StatusOK, "components/modelos.html", echo.Map{
-		"Modelos": pecaConfig.Modelos,
-		"Linha":   linhaSelecionada,
-		"Peca":    pecaSelecionada,
+		"Modelos":    pecaConfig.Modelos,
+		"Linha":      linhaSelecionada,
+		"Peca":       pecaSelecionada,
+		"ImagemPeca": imagemPeca,
 	})
 }
+
 func TecidosHandler(c echo.Context) error {
 	linhaSelecionada := c.QueryParam("linha")
 	pecaSelecionada := c.QueryParam("peca")

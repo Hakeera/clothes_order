@@ -1,75 +1,19 @@
 <h2>Selecione o Tipo de Peça</h2>
 
 <div class="opcoes-grid" id="etapa-pecas">
-    {{if .PecasCompletas}}
-        {{range $nomePeca, $infoPeca := .PecasCompletas}}
-            <div style="border: 2px solid #ddd; border-radius: 8px; overflow: hidden; cursor: pointer; background: white; transition: all 0.3s ease;"
-                 hx-get="/modelos?linha={{$.Linha}}&peca={{$nomePeca}}"
-                 hx-target="#etapa-modelos" 
-                 hx-swap="innerHTML"
-                 onmouseover="this.style.borderColor='#007bff'; this.style.transform='translateY(-2px)'"
-                 onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)'"
-                 onclick="selectPeca(this)">
-                
-                {{if $infoPeca.Img}}
-                    {{range $index, $img := $infoPeca.Img}}
-                        {{if eq $index 0}}
-                            <img src="{{$img}}" 
-                                 alt="{{$nomePeca}}" 
-                                 style="width: 100%; height: 150px; object-fit: cover; display: block;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        {{end}}
-                    {{end}}
-                    <div style="display: none; height: 150px; align-items: center; justify-content: center; background-color: #f8f9fa; color: #6c757d; font-size: 14px;">
-                        Sem imagem disponível
-                    </div>
-                {{else}}
-                    <div style="height: 150px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #6c757d; font-size: 14px;">
-                        Sem imagem disponível
-                    </div>
-                {{end}}
-                
-                <div style="padding: 15px; text-align: center; font-weight: 600; font-size: 16px; color: #333; background: white;">
-                    {{$nomePeca}}
-                </div>
-            </div>
-        {{end}}
-    {{else}}
-        <!-- Fallback para quando não temos PecasCompletas -->
-        {{range $index, $nomePeca := .Pecas}}
-            <div style="border: 2px solid #ddd; border-radius: 8px; overflow: hidden; cursor: pointer; background: white; transition: all 0.3s ease;"
-                 hx-get="/modelos?linha={{$.Linha}}&peca={{$nomePeca}}"
-                 hx-target="#etapa-modelos" 
-                 hx-swap="innerHTML"
-                 onmouseover="this.style.borderColor='#007bff'; this.style.transform='translateY(-2px)'"
-                 onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)'"
-                 onclick="selectPeca(this)">
-                
-                {{if $.Imagens}}
-                    {{if lt $index (len $.Imagens)}}
-                        <img src="{{index $.Imagens $index}}" 
-                             alt="{{$nomePeca}}" 
-                             style="width: 100%; height: 150px; object-fit: cover; display: block;"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div style="display: none; height: 150px; align-items: center; justify-content: center; background-color: #f8f9fa; color: #6c757d; font-size: 14px;">
-                            Sem imagem disponível
-                        </div>
-                    {{else}}
-                        <div style="height: 150px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #6c757d; font-size: 14px;">
-                            Sem imagem disponível
-                        </div>
-                    {{end}}
-                {{else}}
-                    <div style="height: 150px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #6c757d; font-size: 14px;">
-                        Sem imagem disponível
-                    </div>
-                {{end}}
-                
-                <div style="padding: 15px; text-align: center; font-weight: 600; font-size: 16px; color: #333; background: white;">
-                    {{$nomePeca}}
-                </div>
-            </div>
-        {{end}}
+    {{range $index, $nomePeca := .Pecas}}
+        <div style="border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; transition: all 0.3s ease; padding: 20px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;"
+             hx-get="/modelos?linha={{$.Linha}}&peca={{$nomePeca}}"
+             hx-target="#etapa-modelos" 
+             hx-swap="innerHTML"
+             onmouseover="this.style.borderColor='#007bff'; this.style.transform='translateY(-2px)'"
+             onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)'"
+             onclick="selectPeca(this)">
+            
+            <span style="font-weight: 600; font-size: 16px; color: #333;">
+                {{$nomePeca}}
+            </span>
+        </div>
     {{end}}
 </div>
 
